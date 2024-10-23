@@ -10,7 +10,18 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
+    - name: Step referencing action
+      uses: actions/checkout@v4
+      id: checkout
+      env:
+        FOO_VAL: ${{ inputs.bar == 'baz' }} # true
+      if: ${{ inputs.bar == 'baz' }} # false, so this step is always skipped
+
+    - name: Debug
+      run: |
+        echo "RESULT: ${{ steps.checkout.conclusion }}"
+        echo "FOO_VAL: $FOO_VAL"
+      shell: bash
       env:
         FOO_VAL: ${{ inputs.bar == 'baz' }} # true
       if: ${{ inputs.bar == 'baz' }} # false, so this step is always skipped
