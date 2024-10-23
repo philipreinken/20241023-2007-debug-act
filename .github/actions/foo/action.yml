@@ -24,4 +24,4 @@ runs:
       shell: bash
       env:
         FOO_VAL: ${{ inputs.bar == 'baz' }} # true
-      if: ${{ inputs.bar == 'baz' }} # false, so this step is always skipped
+      if: ${{ inputs.bar == 'baz' }} # true as well
