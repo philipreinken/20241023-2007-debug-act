@@ -1,0 +1,18 @@
+name: foo
+description: "Foo"
+
+inputs:
+  bar:
+    description: "Bar"
+    required: false
+    default: "baz"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Testcomposite
+      shell: bash
+      run: "echo $FOO_VAL"
+      env:
+        FOO_VAL: ${{ inputs.bar == 'baz' }} # true
+      if: ${{ inputs.bar == 'baz' }} # false, so this step is always skipped
