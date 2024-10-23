@@ -10,9 +10,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Testcomposite
-      shell: bash
-      run: "echo $FOO_VAL"
+    - uses: actions/checkout@v4
       env:
         FOO_VAL: ${{ inputs.bar == 'baz' }} # true
       if: ${{ inputs.bar == 'baz' }} # false, so this step is always skipped
